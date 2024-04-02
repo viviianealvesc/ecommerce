@@ -13,11 +13,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="css/owl.carousel.css"/>
-	<link rel="stylesheet" href="css/style.css"/>
-	<link rel="stylesheet" href="css/animate.css"/>
+	
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
 
 
 	<!--[if lt IE 9]>
@@ -50,11 +47,6 @@
 			<!-- site menu -->
 			<ul class="main-menu">
 				<li><a href="index.html">Home</a></li>
-				<li><a href="#">Woman</a></li>
-				<li><a href="#">Man</a></li>
-				<li><a href="#">LookBook</a></li>
-				<li><a href="#">Blog</a></li>
-				<li><a href="contact.html">Contact</a></li>
 			</ul>
 		</div>
 	</header>
@@ -64,12 +56,6 @@
 	<!-- Page Info -->
 	<div class="page-info-section page-info">
 		<div class="container">
-			<div class="site-breadcrumb">
-				<a href="">Home</a> / 
-				<a href="">Sales</a> / 
-				<a href="">Bags</a> / 
-				<span>Cart</span>
-			</div>
 			<img src="img/page-info-art.png" alt="" class="page-info-art">
 		</div>
 	</div>
@@ -84,8 +70,8 @@
 					<thead>
 						<tr>
 							<th class="product-th">Product</th>
-							<th>Price</th>
-							<th>Quantity</th>
+							<th>Preço</th>
+							<th>Quantidade</th>
 							<th class="total-th">Total</th>
 						</tr>
 					</thead>

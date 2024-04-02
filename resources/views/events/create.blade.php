@@ -22,7 +22,7 @@
 
     <div id="event-create-container" class="col-md-6 0ffset-md-3">
         <h1>Publicar tenis</h1>
-        <form action="/events/leave/{{$shops->id}}" method="post" enctype="multipart/form-data">
+        <form action="/events" method="POST" enctype="multipart/form-data">
           @csrf
             <div class="form-group">
                 <label for="image">Imagem do Tenis:</label>

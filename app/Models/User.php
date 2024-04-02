@@ -6,10 +6,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Livewire\Volt\Exceptions\ReturnNewClassExecutionEndingException;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
+
+    public function shops() { // O usuario pode ter varios produtos favoritados
+        return $this->belongsToMany('App\Models\Shop');
+    }
+
+    public function shopUsers() { // O usuario pode ter varios produtos
+        return $this->belongsToMany('App\Models\Shop');
+    }
 
     /**
      * The attributes that are mass assignable.

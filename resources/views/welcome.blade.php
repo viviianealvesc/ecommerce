@@ -3,6 +3,17 @@
 @section('content')
 
 
+ @if(!$user)
+ <header class="header-section">
+	<div class="container-fluid">
+      <div class="header-right">
+         <a class="btn btn-primary" href="/events/dashboard">Entrar</a>
+	  </div>
+   </div>
+</header>
+@endif
+
+
 	<!-- Hero section -->
 	<section class="hero-section set-bg" data-setbg="img/bg.jpg">
 		<div class="hero-slider owl-carousel">
@@ -58,8 +69,8 @@
 						</figure>
 						<div class="product-info">
 							<h6>{{ $shops->nome }}</h6>
-							<p>$39.90</p>
-							<a href="#" class="site-btn btn-line">Adicionar ao carrinho</a>
+							<p>{{ $shops->valor }}</p>
+							<a href="/events/carrinho/{{ $shops->id}}" class="site-btn btn-line">Adicionar ao carrinho</a>
 						</div>
 					</div>
 				</div>

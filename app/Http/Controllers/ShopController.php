@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Shop;
+use App\Models\User;
 use Illuminate\Http\Request;
 use League\Flysystem\UrlGeneration\ShardedPrefixPublicUrlGenerator;
 
@@ -13,9 +14,11 @@ class ShopController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+
         $shop = Shop::all();
 
-        return view('welcome', ['shop' => $shop]);
+        return view('welcome', ['shop' => $shop, 'user' => $user]);
        
     }
 
@@ -42,6 +45,7 @@ class ShopController extends Controller
         $shop = new Shop();
 
         $shop->nome = $request->nome;
+        $shop->valor = $request->valor;
         $shop->cores = $request->cores;
         $shop->descricao = $request->descricao;
 
@@ -60,6 +64,25 @@ class ShopController extends Controller
         $shop->save();
 
         return redirect('/')->with('msg', 'Publicação criada com sucesso!');
+    }
+
+    /**
+     * Irá apenas redirecionar o usuario para o carrinho.
+     */
+    public function cart() {
+        return view('events.cart');
+    }
+
+    public function carrinho($id) {
+
+        $user = auth()->user();
+
+        $shop = Shop::findOrFail($id); 
+        
+        $user->shopUsers()->attach($shop->id);
+
+        return redirect('/')->with('msg', 'Produto adicionado ao carrinho');
+
     }
 
     /**
