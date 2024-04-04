@@ -12,7 +12,9 @@ Route::get('/events/update/{id}', [ShopController::class, 'edit'])->middleware('
 Route::put('/update/{id}', [ShopController::class, 'update'])->middleware('auth');
 Route::delete('/events/{id}', [ShopController::class, 'destroy'])->middleware('auth');
 Route::get('/events/cart', [ShopController::class, 'cart']);
-Route::get('/events/carrinho/{id}', [ShopController::class, 'carrinho']);
+Route::get('/events/carrinho/{id}', [ShopController::class, 'carrinho'])->middleware('auth');
+Route::get('/events/carrinho', [ShopController::class, 'mostrarCarrinho']);
+Route::get('/events/delete/{id}', [ShopController::class, 'delete']);
 
 
 
@@ -25,4 +27,4 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('/welcome', [App\Http\Controllers\ShopController::class, 'index'])->name('home');
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="valor">Valor:</label>
-                <input type="number" class="form-control" id="valor" name="valor" placeholder="R$ 109.99">
+                <input type="number" class="form-control" id="valor" name="valor" value="{{ $shop->nome }}">
             </div>
             <div class="form-group">
                 <label for="items">Disponivel nas cores:</label>

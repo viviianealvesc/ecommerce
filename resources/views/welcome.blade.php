@@ -14,6 +14,16 @@
 @endif
 
 
+@if($user)	
+<header>	   
+	<form action="/logout" method="POST">
+		@csrf
+		<a class="btn btn-primary" href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
+	</form>
+<header>
+@endif
+
+
 	<!-- Hero section -->
 	<section class="hero-section set-bg" data-setbg="img/bg.jpg">
 		<div class="hero-slider owl-carousel">
@@ -70,7 +80,10 @@
 						<div class="product-info">
 							<h6>{{ $shops->nome }}</h6>
 							<p>{{ $shops->valor }}</p>
-							<a href="/events/carrinho/{{ $shops->id}}" class="site-btn btn-line">Adicionar ao carrinho</a>
+							<form action="/events/carrinho/{{ $shops->id}}" method="get">
+								@csrf
+							   <a href="/events/carrinho/{{ $shops->id}}" class="site-btn btn-line" onclick="event.preventDefault(); this.closest('form').submit()">Adicionar ao carrinho</a>
+							</form>
 						</div>
 					</div>
 				</div>

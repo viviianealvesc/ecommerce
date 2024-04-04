@@ -22,6 +22,7 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -76,15 +77,21 @@
 						</tr>
 					</thead>
 					<tbody>
+
+					  @foreach($shop as $shops)
 						<tr>
 							<td class="product-col">
-								<img src="img/product/cart.jpg" alt="">
+								<img width="100" src="/img/shop/{{ $shops->image }}" alt="">
 								<div class="pc-title">
-									<h4>Black Shoulder Bag</h4>
-									<a href="#">Edit Product</a>
+									<h6>{{ $shops->nome }}</h6>
+									<form action="/events/delete/{{ $shops->id }}" method="GET">
+										@csrf
+										@method('DELETE')
+									  <a class="btn btn-danger" href="/events/delete/{{ $shops->id }}">Excluir item</a>
+									</form>
 								</div>
 							</td>
-							<td class="price-col">$59.90</td>
+							<td class="price-col">{{ $shops->valor }}</td>
 							<td class="quy-col">
 								<div class="quy-input">
 									<span>Qty</span>
@@ -93,16 +100,20 @@
 							</td>
 							<td class="total-col">$59.90</td>
 						</tr>
+
+					@endforeach
+					
+					
 					</tbody>
 				</table>
 			</div>
 			<div class="row cart-buttons">
 				<div class="col-lg-5 col-md-5">
-					<div class="site-btn btn-continue">Continue shooping</div>
+					<div class="site-btn btn-continue">Continue comprando</div>
 				</div>
 				<div class="col-lg-7 col-md-7 text-lg-right text-left">
-					<div class="site-btn btn-clear">Clear cart</div>
-					<div class="site-btn btn-line btn-update">Update Cart</div>
+					<div class="site-btn btn-clear">Limpar carrinho</div>
+					<div class="site-btn btn-line btn-update">Atualizar carrinho</div>
 				</div>
 			</div>
 		</div>

@@ -46,22 +46,16 @@
 				<i class="fa fa-bars"></i>
 			</div>
 			<div class="header-right">
-			  <a href="/events/cart" class="card-bag"><img src="img/icons/bag.png" alt=""><span>2</span></a>
+			  <a href="/events/carrinho" class="card-bag"><img src="img/icons/bag.png" alt=""><span>1</span></a>
 			  <a href="#" class="search"><img src="img/icons/search.png" alt=""></a>
 
 				@can('user')
-				  <form action="/logout" method="POST">
-                     @csrf
-                     <a class="btn btn-primary" href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
-                  </form>
 
+				
+				 
 				@elsecan('admin')
 				 <a class="btn btn-primary" href="/events/create">Cadastrar produto</a>
 				 <a class="btn btn-primary" href="/events/dashboard">Painel</a>
-				 <form action="/logout" method="POST">
-                    @csrf
-                    <a class="btn btn-primary" href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
-                 </form>
 				@endcan
 			</div>
 			<!-- site menu -->

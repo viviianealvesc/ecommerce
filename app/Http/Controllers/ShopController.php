@@ -18,7 +18,7 @@ class ShopController extends Controller
 
         $shop = Shop::all();
 
-        return view('welcome', ['shop' => $shop, 'user' => $user]);
+        return view('/welcome', ['shop' => $shop, 'user' => $user]);
        
     }
 
@@ -85,6 +85,14 @@ class ShopController extends Controller
 
     }
 
+    public function mostrarCarrinho() {
+        $user = auth()->user();
+
+        $shop = $user->shopUsers;
+
+        return view('events.cart', ['shop' => $shop]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -111,6 +119,7 @@ class ShopController extends Controller
         $shop = Shop::findOrFail($id);
 
         $shop->nome = $request->nome;
+        $shop->valor = $request->valor;
         $shop->cores = $request->cores;
         $shop->descricao = $request->descricao;
 
@@ -138,6 +147,15 @@ class ShopController extends Controller
     {
         Shop::findOrFail($id)->delete();
 
-        return redirect('/events/dashboard')->with('msg', 'Post deletado com sucesso!');
+        return redirect('/events/dashboard')->with('msg', 'Produto deletado com sucesso!');
+    }
+
+    public function delete(string $id)
+    {
+        $user = auth()->user();
+
+        $user->shopUsers()->detach($id);
+
+        return redirect('/events/carrinho')->with('msg', 'Produto deletado do carrinho!!');
     }
 }
