@@ -97,6 +97,73 @@ ol {
 	margin: 0;
 }
 
+/* Event create page */
+#event-create-container {
+    padding: 30px;
+    margin: 0 auto;
+}
+
+#event-create-container label {
+    font-weight: bold;
+}
+
+.botao {
+    width: 20%;
+}
+
+#event-create-container input,
+#event-create-container select,
+#event-create-container textarea {
+    font-size: 18px;
+}
+
+.form-group {
+    padding: 10px;
+}
+
+/* Event page */
+#image-container,
+#info-container {
+    margin-top: 30px;
+}
+
+#image-container img {
+    border-radius: 10px;
+}
+
+#info-container h1 {
+    font-size: 36px;
+    font-weight: 900;
+}
+
+#info-container p {
+    margin: 0;
+}
+
+#info-container h3,
+#description-container h3 {
+    font-weight: bold;
+}
+
+#info-container ion-icon {
+    color: #8A60FF;
+    margin-right: 5px;
+}
+
+#info-container,
+ #event-submit {
+    margin: 20px 0;
+ }
+
+ #items-list {
+    list-style: none;
+    padding-left: 0;
+ }
+
+ #items-list li {
+    display: flex;
+ }
+
 /*---------------------
   Helper CSS
 -----------------------*/

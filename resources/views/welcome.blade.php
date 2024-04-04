@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title', 'Ecommerce')
 @section('content')
 
@@ -14,13 +14,12 @@
 @endif
 
 
-@if($user)	
-<header>	   
+@if($user)  
 	<form action="/logout" method="POST">
 		@csrf
 		<a class="btn btn-primary" href="/logout" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">Sair</a>
 	</form>
-<header>
+
 @endif
 
 
@@ -65,15 +64,15 @@
 				<div class="mix col-lg-3 col-md-6 best">
 					<div class="product-item">
 						<figure>
-							<img src="img/shop/{{$shops->image}}" alt="">
+							<img src="img/shop/{{ $shops->image }}" alt="">
 							<div class="pi-meta">
 								<div class="pi-m-left">
 									<img src="img/icons/eye.png" alt="">
-									<p>quick view</p>
+									<a href="/events/product/{{ $shops->id}}">quick view</a>
 								</div>
 								<div class="pi-m-right">
 									<img src="img/icons/heart.png" alt="">
-									<p>Favotitar</p>
+									<a href="/events/leave/{{ $shops->id }}">Favotitar</a>
 								</div>
 							</div>
 						</figure>

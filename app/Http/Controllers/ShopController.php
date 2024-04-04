@@ -18,7 +18,7 @@ class ShopController extends Controller
 
         $shop = Shop::all();
 
-        return view('/welcome', ['shop' => $shop, 'user' => $user]);
+        return view('/home', ['shop' => $shop, 'user' => $user]);
        
     }
 
@@ -98,7 +98,9 @@ class ShopController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $shop = Shop::findOrFail($id);
+
+        return view('events.show', ['shop' => $shop]);
     }
 
     /**
@@ -139,6 +141,26 @@ class ShopController extends Controller
 
         return redirect('/events/dashboard')->with('msg', 'Publicação editada com sucesso!');
     }
+
+    public function favorito($id) {
+        $user = auth()->user();
+
+        Shop::findOrFail($id);
+
+        $user->shops()->attach($id);
+
+        return redirect('/')->with('msg', 'Produto favoritado!');
+    }
+
+    public function productFav() {
+        $user = auth()->user();
+
+        $shops = $user->shops;
+
+        return view('events.favorito', ['shops' => $shops]);
+    }
+
+ 
 
     /**
      * Remove the specified resource from storage.

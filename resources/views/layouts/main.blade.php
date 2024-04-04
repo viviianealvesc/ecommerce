@@ -27,6 +27,8 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+	
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -47,6 +49,7 @@
 			</div>
 			<div class="header-right">
 			  <a href="/events/carrinho" class="card-bag"><img src="img/icons/bag.png" alt=""><span>1</span></a>
+			  <a href="/events/favoritos/mostrar" class="card-bag"><i class="bi bi-heart-fill"></i><span>1</span></a>
 			  <a href="#" class="search"><img src="img/icons/search.png" alt=""></a>
 
 				@can('user')
@@ -163,5 +166,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="js/sly.min.js"></script>
 	<script src="js/jquery.nicescroll.min.js"></script>
 	<script src="js/main.js"></script>
+
+	 <!-- Icones -->
+     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     </body>
 </html>

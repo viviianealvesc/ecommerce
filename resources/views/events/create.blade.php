@@ -1,22 +1,34 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title', 'Produto')
 @section('content')
 
-<head>
-    	<!-- Favicon -->   
-	<link href="img/favicon.ico" rel="shortcut icon"/>
+<head> 
 
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <style>
+        /* Event create page */
+    #event-create-container {
+        padding: 30px;
+        margin: 0 auto;
+    }
 
-<!-- Stylesheets -->
-<link rel="stylesheet" href="css/bootstrap.min.css"/>
-<link rel="stylesheet" href="css/font-awesome.min.css"/>
-<link rel="stylesheet" href="css/owl.carousel.css"/>
-<link rel="stylesheet" href="css/style.css"/>
-<link rel="stylesheet" href="css/animate.css"/>
+    #event-create-container label {
+        font-weight: bold;
+    }
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    .botao {
+        width: 20%;
+    }
+
+    #event-create-container input,
+    #event-create-container select,
+    #event-create-container textarea {
+        font-size: 18px;
+    }
+
+    .form-group {
+        padding: 10px;
+    }
+    </style>
 </head>
 
 

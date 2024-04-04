@@ -15,6 +15,9 @@ Route::get('/events/cart', [ShopController::class, 'cart']);
 Route::get('/events/carrinho/{id}', [ShopController::class, 'carrinho'])->middleware('auth');
 Route::get('/events/carrinho', [ShopController::class, 'mostrarCarrinho']);
 Route::get('/events/delete/{id}', [ShopController::class, 'delete']);
+Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
+Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);
+Route::get('/events/product/{id}', [ShopController::class, 'show']);
 
 
 
@@ -27,4 +30,4 @@ require __DIR__.'/auth.php';
 
 Auth::routes();
 
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

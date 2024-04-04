@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Beca Store')
+@section('title', '$shop->nome')
 @section('content')
+
 
 	<!-- Page Info -->
 	<div class="page-info-section page-info">
@@ -20,33 +21,24 @@
 						<tr>
 							<th class="product-th">Product</th>
 							<th>Preço</th>
-							<th>Quantidade</th>
-							<th class="total-th">Total</th>
 						</tr>
 					</thead>
 					<tbody>
 
-					  @foreach($shop as $shops)
+					  @foreach($shops as $shop)
 						<tr>
 							<td class="product-col">
-								<img width="100" src="/img/shop/{{ $shops->image }}" alt="">
+								<img width="100" src="/img/shop/{{ $shop->image }}" alt="">
 								<div class="pc-title">
-									<h6>{{ $shops->nome }}</h6>
-									<form action="/events/delete/{{ $shops->id }}" method="GET">
+									<h6>{{ $shop->nome }}</h6>
+									<form action="/events/delete/{{ $shop->id }}" method="GET">
 										@csrf
 										@method('DELETE')
-									  <a class="btn btn-danger" href="/events/delete/{{ $shops->id }}">Excluir item</a>
+									  <a class="btn btn-danger" href="/events/delete/{{ $shop->id }}">Excluir item</a>
 									</form>
 								</div>
 							</td>
-							<td class="price-col">{{ $shops->valor }}</td>
-							<td class="quy-col">
-								<div class="quy-input">
-									<span>Qty</span>
-									<input type="number" value="01">
-								</div>
-							</td>
-							<td class="total-col">$59.90</td>
+							<td class="price-col">{{ $shop->valor }}</td>
 						</tr>
 
 					@endforeach
@@ -60,8 +52,7 @@
 					<div class="site-btn btn-continue">Continue comprando</div>
 				</div>
 				<div class="col-lg-7 col-md-7 text-lg-right text-left">
-					<div class="site-btn btn-clear">Limpar carrinho</div>
-					<div class="site-btn btn-line btn-update">Atualizar carrinho</div>
+					<div class="site-btn btn-clear">Limpar Favoritos</div>
 				</div>
 			</div>
 		</div>
@@ -114,3 +105,4 @@
 
 
 	@endsection
+

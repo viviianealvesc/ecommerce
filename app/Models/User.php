@@ -14,10 +14,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     public function shops() { // O usuario pode ter varios produtos favoritados
-        return $this->belongsToMany('App\Models\Shop');
+        return $this->belongsToMany(Shop::class, 'user_shop');
     }
 
-    public function shopUsers() { // O usuario pode ter varios produtos
+    public function shopUsers() { // O usuario pode ter varios produtos no carrinho
         return $this->belongsToMany('App\Models\Shop');
     }
 
