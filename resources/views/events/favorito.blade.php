@@ -49,60 +49,15 @@
 			</div>
 			<div class="row cart-buttons">
 				<div class="col-lg-5 col-md-5">
-					<div class="site-btn btn-continue">Continue comprando</div>
+					<div class="site-btn btn-continue">
+						<a href="/">Continue comprando</a>
+					</div>
 				</div>
 				<div class="col-lg-7 col-md-7 text-lg-right text-left">
 					<div class="site-btn btn-clear">Limpar Favoritos</div>
 				</div>
 			</div>
 		</div>
-		<div class="card-warp">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4">
-						<div class="shipping-info">
-							<h4>Shipping method</h4>
-							<p>Select the one you want</p>
-							<div class="shipping-chooes">
-								<div class="sc-item">
-									<input type="radio" name="sc" id="one">
-									<label for="one">Next day delivery<span>$4.99</span></label>
-								</div>
-								<div class="sc-item">
-									<input type="radio" name="sc" id="two">
-									<label for="two">Standard delivery<span>$1.99</span></label>
-								</div>
-								<div class="sc-item">
-									<input type="radio" name="sc" id="three">
-									<label for="three">Personal Pickup<span>Free</span></label>
-								</div>
-							</div>
-							<h4>Cupon code</h4>
-							<p>Enter your cupone code</p>
-							<div class="cupon-input">
-								<input type="text">
-								<button class="site-btn">Apply</button>
-							</div>
-						</div>
-					</div>
-					<div class="offset-lg-2 col-lg-6">
-						<div class="cart-total-details">
-							<h4>Cart total</h4>
-							<p>Final Info</p>
-							<ul class="cart-total-card">
-								<li>Subtotal<span>$59.90</span></li>
-								<li>Shipping<span>Free</span></li>
-								<li class="total">Total<span>$59.90</span></li>
-							</ul>
-							<a class="site-btn btn-full" href="checkout.html">Proceed to checkout</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Page end -->
-
-
+	
 	@endsection
 

@@ -21,6 +21,7 @@
           
               <form action="/events/carrinho/{{ $shop->id}}" method="GET">
                 @csrf
+                <a  href="/events/leave/{{ $shop->id }}" class="btn btn-danger"  id="event-submit"><img width="20" src="/img/icons/coracao.png" alt=""> Favotitar</a> <br>
                 <a href="/events/carrinho/{{ $shop->id}}" class="btn btn-primary" id="event-submit" onclick="event.preventDefault; this.closest('form').submit();"><img width="20" src="/img/icons/carrinho.png" alt=""> Adicionar ao carrinho</a>
               </form>
         </div>

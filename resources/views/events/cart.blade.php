@@ -43,10 +43,19 @@
 							<td class="quy-col">
 								<div class="quy-input">
 									<span>Qty</span>
-									<input type="number" value="01">
+									<form action="/events/join/cart" method="POST">
+										@csrf
+									  <input name="quantidade" id="quantidade" type="number"  onclick="event.preventDefault; this.closest('form').submit();">
+									 
+									  <a href="/events/join/cart">OK</a>
+									</form>
+									
 								</div>
+								
 							</td>
-							<td class="total-col">$59.90</td>
+							<td class="total-col">
+							<p>Total </p>
+							</td>
 						</tr>
 
 					@endforeach
@@ -101,7 +110,7 @@
 							<ul class="cart-total-card">
 								<li>Subtotal<span>$59.90</span></li>
 								<li>Shipping<span>Free</span></li>
-								<li class="total">Total<span>$59.90</span></li>
+								<li class="total">Total<span>$ {{ $shopSoma }}</span></li>
 							</ul>
 							<a class="site-btn btn-full" href="checkout.html">Proceed to checkout</a>
 						</div>

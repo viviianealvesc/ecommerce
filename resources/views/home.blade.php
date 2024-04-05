@@ -49,4 +49,22 @@
 	</section>
 	<!-- Product section end -->
 
+	<div class="row">
+		<div class="col partner-col text-center">
+			<img width="200" src="/img/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+		</div>
+		<div class="col partner-col text-center">
+			<img width="200" src="/img/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+		</div>
+		<div class="col partner-col text-center">
+			<img width="200" src="/img/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+		</div>
+		<div class="col partner-col text-center">
+			<img width="200" src="/img/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+		</div>
+		<div class="col partner-col text-center">
+			<img width="200" src="/img/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+		</div>
+	</div>
+
 @endsection

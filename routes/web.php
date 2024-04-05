@@ -18,6 +18,7 @@ Route::get('/events/delete/{id}', [ShopController::class, 'delete']);
 Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
 Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);
 Route::get('/events/product/{id}', [ShopController::class, 'show']);
+Route::post('/events/join/cart', [ShopController::class, 'quantProd']);
 
 
 

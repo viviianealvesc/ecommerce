@@ -90,7 +90,28 @@ class ShopController extends Controller
 
         $shop = $user->shopUsers;
 
-        return view('events.cart', ['shop' => $shop]);
+        $shopSoma = $shop->sum('valor');
+
+        return view('events.cart', ['shop' => $shop, 'shopSoma' => $shopSoma]);
+    }
+    
+
+    public function quantProd(Request $request) {
+
+        $shop = new Shop();
+
+        $qty = $request->query('quantidade');
+
+        $produto = $shop->valor;
+
+        $valorTotal = $produto * $qty;
+
+        var_dump($qty);
+
+      
+
+        return view('events.cart', ['valorTotal' => $valorTotal]);
+
     }
 
     /**
