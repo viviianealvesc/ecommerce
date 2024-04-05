@@ -447,6 +447,7 @@
                                     <a  class="nav-link dropdown" href="/" data-bs-toggle="dropdown">Home</a>
                                     <a class="nav-link dropdown" href="/events/carrinho" class="card-bag"><span>Carrinho (2)</span></a>
                                     <a class="nav-link dropdown" href="/events/favoritos/mostrar" class="card-bag"><span>favoritos (4)</span></a>
+									<a class="nav-link dropdown" href="/events/pag" class="card-bag"><span>PagSeguro</span></a>
                                     @can('user')
 
 				

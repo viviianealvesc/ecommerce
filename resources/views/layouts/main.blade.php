@@ -51,6 +51,8 @@
 			  <a href="/events/carrinho" class="card-bag"><img src="img/icons/bag.png" alt=""><span>1</span></a>
 			  <a href="/events/favoritos/mostrar" class="card-bag"><i class="bi bi-heart-fill"></i><span>1</span></a>
 			  <a href="#" class="search"><img src="img/icons/search.png" alt=""></a>
+			  
+			  
 
 				@can('user')
 

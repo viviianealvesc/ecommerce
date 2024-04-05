@@ -29,6 +29,10 @@ class ShopController extends Controller
         return view('events.dashboard', ['shop' => $shop]);
     }
 
+    public function pagSeguro() {
+        return view('/pay');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
