@@ -21,6 +21,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Shop');
     }
 
+    public function enderecos() { // O usuario pode ter "muitos" endereços
+        return $this->hasMany('App/Models/Endereco');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -37,13 +37,8 @@ class ShopController extends Controller
 
         $prodQuant = $user->shopUsers->toArray();
 
-        echo '<pre>';
-        var_dump($prodQuant);
-        echo '</pre>';
-
         // Inicializa uma variável para armazenar os nomes dos produtos
         $nomesProdutos = '';
-        $valorProdutos = '';
 
         // Loop através de todos os produtos e concatena os nomes
         foreach ($prodQuant as $produto) {
@@ -128,9 +123,9 @@ $body =
    // die();
    // }
 
-   $data = json_decode($response, true);
-
-    var_dump($data);
+   //$data = json_decode($response, true);
+ 
+   // var_dump($data);
    
 
     return view('pay', [
