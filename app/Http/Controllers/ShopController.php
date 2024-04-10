@@ -29,8 +29,115 @@ class ShopController extends Controller
         return view('events.dashboard', ['shop' => $shop]);
     }
 
-    public function pagSeguro() {
-        return view('/pay');
+
+
+    public function pagarCompra() {
+
+        $user = auth()->user();
+
+        $prodQuant = $user->shopUsers->toArray();
+
+        echo '<pre>';
+        var_dump($prodQuant);
+        echo '</pre>';
+
+        // Inicializa uma variável para armazenar os nomes dos produtos
+        $nomesProdutos = '';
+        $valorProdutos = '';
+
+        // Loop através de todos os produtos e concatena os nomes
+        foreach ($prodQuant as $produto) {
+            $nomesProdutos .= $produto['nome'] . ', ';
+        }
+
+        // Remove a vírgula extra no final da string
+        $nomesProdutos = rtrim($nomesProdutos, ', ');
+
+
+        $endpoint = 'https://sandbox.api.pagseguro.com/orders';
+        $token = '5CDFE1B717394FBCB659BACF6D2572C7';
+
+$body =
+  [
+    "reference_id" => "ex-00001",
+    "customer" => [
+      "name" => "$user->name",
+      "email" => "$user->email",
+      "tax_id" => "12345678909",
+      "phones" => [
+        [
+          "country" => "55",
+          "area" => "11",
+          "number" => "999999999",
+          "type" => "MOBILE"
+        ]
+      ]
+    ],
+
+    "items" => [
+      [
+        "name" =>  $nomesProdutos,
+        "quantity" => count($prodQuant),
+        "unit_amount" => 500
+      ]
+    ],
+    "qr_codes" => [
+      [
+        "amount" => [
+          "value" => 500
+        ],
+        "expiration_date" => "2024-06-29T20:15:59-03:00",
+      ]
+    ],
+    "shipping" => [
+      "address" => [
+        "street" => "Avenida Brigadeiro Faria Lima",
+        "number" => "1384",
+        "complement" => "apto 12",
+        "locality" => "Pinheiros",
+        "city" => "São Paulo",
+        "region_code" => "SP",
+        "country" => "BRA",
+        "postal_code" => "01452002"
+      ]
+    ],
+    "notification_urls" => [
+      "https://alexandrecardoso-pagseguro.ultrahook.com"
+    ]
+  ];
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $endpoint);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($curl, CURLOPT_CAINFO, "cacert.pem");
+    curl_setopt($curl, CURLOPT_HTTPHEADER, [
+    'Content-Type:application/json',
+    'Authorization: Bearer ' . $token
+    ]);
+
+    $response = curl_exec($curl);
+    $error = curl_error($curl);
+
+    curl_close($curl);
+
+    //if ($error) {
+    //var_dump($error);
+   // die();
+   // }
+
+   $data = json_decode($response, true);
+
+    var_dump($data);
+   
+
+    return view('pay', [
+        'response' => json_decode($response, true),
+        'error' => $error
+    ]);
+
     }
 
     /**

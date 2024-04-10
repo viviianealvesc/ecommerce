@@ -19,7 +19,7 @@ Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
 Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);
 Route::get('/events/product/{id}', [ShopController::class, 'show']);
 Route::post('/events/join/cart', [ShopController::class, 'quantProd']);
-Route::get('/events/pag', [ShopController::class, 'pagSeguro']);
+Route::get('/events/pag', [ShopController::class, 'pagarCompra']); //para efetuar o pagamento
 
 
 

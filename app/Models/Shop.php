@@ -20,4 +20,8 @@ class Shop extends Model
     protected $casts = [
         'cores' => 'array'
     ];
+
+    protected $images = [
+        'image' => 'array'
+    ];
 }

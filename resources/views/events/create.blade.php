@@ -38,7 +38,7 @@
           @csrf
             <div class="form-group">
                 <label for="image">Imagem do Tenis:</label>
-                <input type="file" id="image" name="image" class="form-control-file">
+                <input type="file" id="image[]" name="image[]" class="form-control-file" multiple>
             </div>
             <div class="form-group">
                 <label for="nome">Nome do tenis:</label>
