@@ -19,7 +19,12 @@ Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
 Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);
 Route::get('/events/product/{id}', [ShopController::class, 'show']);
 Route::post('/events/join/cart', [ShopController::class, 'quantProd']);
-Route::get('/events/pag', [ShopController::class, 'pagarCompra']); //para efetuar o pagamento
+Route::get('/events/retiradaProd', [ShopController::class, 'retiradaProd']); //pagina de opção de retirada
+Route::get('/events/endereco', [ShopController::class, 'endereco']); //cadastro de endereço
+Route::post('/events/checkout', [ShopController::class, 'confEndereco']); //envio de endereço para o banco
+Route::get('/events/formaPagamento', [ShopController::class, 'formaPagamento']); //forma de pagamento
+Route::get('/events/pag', [ShopController::class, 'pagarCompra']); //pix
+
 
 
 

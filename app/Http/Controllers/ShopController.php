@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Endereco;
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,6 +28,42 @@ class ShopController extends Controller
         $shop = Shop::all();
 
         return view('events.dashboard', ['shop' => $shop]);
+    }
+
+    public function retiradaProd() {
+      return view('retiradaProd'); //opçao de retirada
+    }
+
+    public function endereco() {
+      return view('events.checkout'); //pagina de informar o endereço
+    }
+
+    public function confEndereco(Request $request) {
+
+      $endereco = new Endereco();
+
+      $user = auth()->user();
+
+      $endereco->nome = $request->nome;
+      $endereco->cep = $request->cep;
+      $endereco->estado = $request->estado;
+      $endereco->cidade = $request->cidade;
+      $endereco->bairro = $request->bairro;
+      $endereco->rua = $request->rua;
+      $endereco->numero = $request->numero;
+      $endereco->complemento = $request->complemento;
+      $endereco->telefone = $request->telefone;
+
+      $end = $endereco->user_id = $user->id;
+
+      $endereco->save();
+
+
+      return redirect('formaPagamento')->with('msg', 'Endereço cadastrado!');
+    }
+
+    public function formaPagamento() {
+      return view('events.formaPagamento'); //pagina de informar o endereço
     }
 
 

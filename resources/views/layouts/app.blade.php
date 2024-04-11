@@ -387,6 +387,12 @@
 	background: #f7f7f7;
 }
 
+.cart-total-details a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+}
+
 
     </style>
 

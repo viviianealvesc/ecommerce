@@ -109,7 +109,7 @@
 								<li>Shipping<span>Free</span></li>
 								<li class="total">Total<span>$ {{ $shopSoma }}</span></li>
 							</ul>
-							<a class="site-btn btn-full" href="/events/pag">checkout</a>
+							<a class="site-btn btn-full" href="/events/endereco">checkout</a>
 						</div>
 					</div>
 				</div>
