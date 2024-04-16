@@ -11,6 +11,16 @@
 	<!-- Page Info end -->
 
 
+	@if(count($shop) == 0)
+
+	<div class="page-area cart-page spad">
+		<div class="col-4 m-auto">
+			<h5 class="col-9 m-auto">Seu carrinho esta vazio!</h5>
+			<img src="/img/icons/carrinho-vazio.png" alt="">
+		</div>
+	</div>
+
+	@else
 	<!-- Page -->
 	<div class="page-area cart-page spad">
 		<div class="container">
@@ -27,6 +37,7 @@
 					<tbody>
 
 					  @foreach($shop as $shops)
+					    @foreach($carrinhoProdu as $carrinhos)
 						<tr>
 							<td class="product-col">
 								<img width="100" src="/img/shop/{{ $shops->image }}" alt="">
@@ -43,20 +54,15 @@
 							<td class="quy-col">
 								<div class="quy-input">
 									<span>Qty</span>
-									<form action="/events/join/cart" method="POST">
-										@csrf
-									  <input name="quantidade" id="quantidade" type="number"  onclick="event.preventDefault; this.closest('form').submit();">
-									 
-									  <a href="/events/join/cart">OK</a>
-									</form>
-									
+									  <input name="quantidade" id="quantidade" min="1" type="number" value="{{ $carrinhos->quantity }}">
 								</div>
 								
 							</td>
 							<td class="total-col">
-							<p>Total </p>
+							<p>{{ $carrinhos->valor }} </p>
 							</td>
 						</tr>
+						@endforeach
 
 					@endforeach
 					
@@ -76,30 +82,6 @@
 		</div>
 		<div class="card-warp">
 			<div class="container">
-				<div class="row">
-					<div class="col-lg-4">
-						<div class="shipping-info">
-							<h4>Método de envio</h4>
-							<p>Selecione o que você deseja</p>
-							<div class="shipping-chooes">
-								<div class="sc-item">
-									<input type="radio" name="sc" id="two">
-									<label for="two">Entrega Padrão<span>$1.99</span></label>
-								</div>
-								<div class="sc-item">
-									<input type="radio" name="sc" id="three">
-									<label for="three">Retirada Pessoal<span>Free</span></label>
-								</div>
-							</div>
-							<!-- <h4>Cupon code</h4>
-							<p>Enter your cupone code</p>
-							<div class="cupon-input">
-								<input type="text">
-								<button class="site-btn">Apply</button>
-							</div>
-                            -->
-						</div>
-					</div>
 					<div class="offset-lg-2 col-lg-6">
 						<div class="cart-total-details">
 							<h4>Total do carrinho</h4>
@@ -109,7 +91,11 @@
 								<li>Shipping<span>Free</span></li>
 								<li class="total">Total<span>$ {{ $shopSoma }}</span></li>
 							</ul>
-							<a class="site-btn btn-full" href="/events/endereco">checkout</a>
+							@if(count($endereco) == 0)
+							<a class="site-btn btn-continue" href="/events/endereco">checkout</a>
+							@else
+							<a class="site-btn btn-continue" href="/events/formaPagamento">Finalizar compra</a>
+							@endif
 						</div>
 					</div>
 				</div>
@@ -117,6 +103,6 @@
 		</div>
 	</div>
 	<!-- Page end -->
-
+	@endif
 
 	@endsection

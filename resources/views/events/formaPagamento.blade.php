@@ -17,16 +17,22 @@
 						<div class="shipping-info">
 							<h4>Método de envio</h4>
 							<p>Selecione o que você deseja</p>
-							<div class="shipping-chooes">
-								<div class="sc-item">
-									<input type="radio" name="sc" id="two">
-									<label for="two">Entrega Padrão<span>$1.99</span></label>
+							<form action="/events/pag" method="POST">
+								@csrf
+								<div class="shipping-chooes">
+									<div class="sc-item">
+										<input type="radio" name="pix" id="pix">
+										<label for="pix"><img width="30" src="/img/icons/logo-pix.webp" alt=""> Pix</label>
+									</div>
+									<div class="sc-item">
+										<input type="radio" name="cartao" id="cartao">
+										<label for="cartao"><img src="/img/icons/cartao.png" alt=""> Cartão de credito</label>
+									</div>
 								</div>
-								<div class="sc-item">
-									<input type="radio" name="sc" id="three">
-									<label for="three">Retirada Pessoal<span>Free</span></label>
-								</div>
-							</div>
+
+								<button type="submit" class="btn btn-primary">Finalizar</button>
+							</form>
+							
 							<!-- <h4>Cupon code</h4>
 							<p>Enter your cupone code</p>
 							<div class="cupon-input">

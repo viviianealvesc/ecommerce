@@ -14,7 +14,8 @@ class Shop extends Model
     }
 
     public function shopsUser() { // Um produto pode ter varios usuarios (carrinho)
-        return $this->belongsToMany('App\Models\User');
+        //return $this->belongsToMany('App\Models\User');
+        return $this->belongsToMany(User::class, 'shop_user');
     }
 
     protected $casts = [

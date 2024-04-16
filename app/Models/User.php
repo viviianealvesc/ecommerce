@@ -17,12 +17,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Shop::class, 'user_shop');
     }
 
-    public function shopUsers() { // O usuario pode ter varios produtos no carrinho
-        return $this->belongsToMany('App\Models\Shop');
+    public function shopUsers() { //(Mostra os produtos) O usuario pode ter varios produtos no carrinho
+        return $this->belongsToMany(Shop::class);
+    }
+
+    public function shopUserCarrinho() { //(Adiciona os produtos) O usuario pode ter varios produtos no carrinho
+        return $this->hasMany(ShopUser::class, 'user_id');
     }
 
     public function enderecos() { // O usuario pode ter "muitos" endereços
-        return $this->hasMany('App/Models/Endereco');
+        return $this->hasMany('App\Models\Endereco');
     }
 
     /**

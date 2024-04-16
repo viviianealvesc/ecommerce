@@ -391,8 +391,43 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-decoration: none;
+		color: black;
 }
 
+.btn-continue {
+	background: #b09d81;
+	padding: 21px 30px;
+	min-width: 260px;
+	font-size: 16px;
+}
+
+.btn-continue:hover {
+	background: #c0ac8d;
+	transition: 0.4s;
+}
+
+.sc-item label {
+	font-size: 0.9rem;
+}
+
+.sc-item {
+	background: white;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.sc-item:hover {
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quantidade {
+	width: 80px;
+	border: none;
+	border-bottom: 1px solid #414141;
+	background-color: #ebebeb;
+	padding-left: 10px;
+}
 
     </style>
 
@@ -451,7 +486,7 @@
                                     </form>
 
                                     <a  class="nav-link dropdown" href="/" data-bs-toggle="dropdown">Home</a>
-                                    <a class="nav-link dropdown" href="/events/carrinho" class="card-bag"><span>Carrinho (2)</span></a>
+                                    <a class="nav-link dropdown" href="/events/carrinho" class="card-bag"><span>Carrinho ({{ count($carrinho ?? []) }})</span></a>
                                     <a class="nav-link dropdown" href="/events/favoritos/mostrar" class="card-bag"><span>favoritos (4)</span></a>
 									<a class="nav-link dropdown" href="/events/pag" class="card-bag"><span>PagSeguro</span></a>
                                     @can('user')

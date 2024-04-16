@@ -18,12 +18,15 @@
             <li><ion-icon name="play-outline"></ion-icon><span>{{ $cores }}</span></li>
             @endforeach
             </ul>
-          
-              <form action="/events/carrinho/{{ $shop->id}}" method="GET">
+            <a  href="/events/leave/{{ $shop->id }}" class="btn btn-danger"  id="event-submit"><img width="20" src="/img/icons/coracao.png" alt=""> Favotitar</a> <br>
+
+            <form action="/events/carrinho/{{ $shop->id }}" method="post">
                 @csrf
-                <a  href="/events/leave/{{ $shop->id }}" class="btn btn-danger"  id="event-submit"><img width="20" src="/img/icons/coracao.png" alt=""> Favotitar</a> <br>
-                <a href="/events/carrinho/{{ $shop->id}}" class="btn btn-primary" id="event-submit" onclick="event.preventDefault; this.closest('form').submit();"><img width="20" src="/img/icons/carrinho.png" alt=""> Adicionar ao carrinho</a>
-              </form>
+                <input type="hidden" name="valor" id="valor" value="{{ $shop->valor }}"> <!-- Adicione um campo oculto para enviar o valor do produto -->
+                Quant <input class="quantidade" name="quantity" id="quantity" min="1" type="number" value="1"/><br>
+                <button type="submit" class="btn btn-primary" id="event-submit"><img width="20" src="/img/icons/carrinho.png" alt=""> Adicionar ao carrinho</button> <!-- Substitua o link por um botão de envio -->
+            </form>
+
         </div>
         <div class="col-md-12" id="description-container">
             <h3>Descrição</h3>

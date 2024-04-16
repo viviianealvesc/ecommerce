@@ -3,8 +3,6 @@
 @section('content')
 
 
-	
-
 	<!-- Product section -->
 	<section class="product-section spad">
 		<div class="container">
@@ -33,9 +31,11 @@
 						<div class="product-info">
 							<h6>{{ $shops->nome }}</h6>
 							<p>{{ $shops->valor }}</p>
-							<form action="/events/carrinho/{{ $shops->id}}" method="get">
+							<form action="/events/carrinho/{{ $shops->id }}" method="get">
 								@csrf
-							   <a href="/events/carrinho/{{ $shops->id}}" class="site-btn btn-line" onclick="event.preventDefault(); this.closest('form').submit()">Adicionar ao carrinho</a>
+							   <a href="/events/carrinho/{{ $shops->id }}" class="site-btn btn-line" onclick="event.preventDefault(); this.closest('form').submit()">Adicionar ao carrinho</a>
+							   
+
 							</form>
 						</div>
 					</div>

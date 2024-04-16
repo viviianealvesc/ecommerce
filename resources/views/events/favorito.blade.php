@@ -31,10 +31,10 @@
 								<img width="100" src="/img/shop/{{ $shop->image }}" alt="">
 								<div class="pc-title">
 									<h6>{{ $shop->nome }}</h6>
-									<form action="/events/delete/{{ $shop->id }}" method="GET">
+									<form action="/events/deletarFav/{{ $shop->id }}" method="GET">
 										@csrf
 										@method('DELETE')
-									  <a class="btn btn-danger" href="/events/delete/{{ $shop->id }}">Excluir item</a>
+									  <a class="btn btn-danger" href="/events/deletarFav/{{ $shop->id }}">Excluir item</a>
 									</form>
 								</div>
 							</td>

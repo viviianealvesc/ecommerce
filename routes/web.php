@@ -12,18 +12,19 @@ Route::get('/events/update/{id}', [ShopController::class, 'edit'])->middleware('
 Route::put('/update/{id}', [ShopController::class, 'update'])->middleware('auth');
 Route::delete('/events/{id}', [ShopController::class, 'destroy'])->middleware('auth');
 Route::get('/events/cart', [ShopController::class, 'cart']);
-Route::get('/events/carrinho/{id}', [ShopController::class, 'carrinho'])->middleware('auth');
+Route::post('/events/carrinho/{id}', [ShopController::class, 'carrinho'])->middleware('auth');
 Route::get('/events/carrinho', [ShopController::class, 'mostrarCarrinho']);
 Route::get('/events/delete/{id}', [ShopController::class, 'delete']);
 Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
 Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);
+Route::get('/events/deletarFav/{id}', [ShopController::class, 'favDelete']);
 Route::get('/events/product/{id}', [ShopController::class, 'show']);
 Route::post('/events/join/cart', [ShopController::class, 'quantProd']);
 Route::get('/events/retiradaProd', [ShopController::class, 'retiradaProd']); //pagina de opção de retirada
 Route::get('/events/endereco', [ShopController::class, 'endereco']); //cadastro de endereço
 Route::post('/events/checkout', [ShopController::class, 'confEndereco']); //envio de endereço para o banco
 Route::get('/events/formaPagamento', [ShopController::class, 'formaPagamento']); //forma de pagamento
-Route::get('/events/pag', [ShopController::class, 'pagarCompra']); //pix
+Route::post('/events/pag', [ShopController::class, 'pagarCompra']); //pix
 
 
 

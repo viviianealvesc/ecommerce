@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ShopUser;
 use App\Models\Endereco;
 use App\Models\Shop;
 use App\Models\User;
@@ -19,7 +20,10 @@ class ShopController extends Controller
 
         $shop = Shop::all();
 
-        return view('/home', ['shop' => $shop, 'user' => $user]);
+        // Mostrar quantos produtos o usuario tem no carrinho
+        $carrinho = $user->shopUsers;
+
+        return view('/home', ['shop' => $shop, 'user' => $user, 'carrinho' => $carrinho]);
        
     }
 
@@ -59,112 +63,136 @@ class ShopController extends Controller
       $endereco->save();
 
 
-      return redirect('formaPagamento')->with('msg', 'Endereço cadastrado!');
+      return redirect('eventsformaPagamento')->with('msg', 'Endereço cadastrado!');
     }
 
     public function formaPagamento() {
-      return view('events.formaPagamento'); //pagina de informar o endereço
+      return view('events/formaPagamento'); //pagina de informar o endereço
     }
 
 
 
-    public function pagarCompra() {
+    public function pagarCompra(Request $request) {
 
-        $user = auth()->user();
+      $dados = $request->all();
 
-        $prodQuant = $user->shopUsers->toArray();
+      $user = auth()->user();
 
-        // Inicializa uma variável para armazenar os nomes dos produtos
-        $nomesProdutos = '';
+       // Acessar o endereço do usuario logado
+       $enderecoUser = $user->enderecos;
 
-        // Loop através de todos os produtos e concatena os nomes
-        foreach ($prodQuant as $produto) {
-            $nomesProdutos .= $produto['nome'] . ', ';
-        }
+    if (isset($dados['pix'])) {
 
-        // Remove a vírgula extra no final da string
-        $nomesProdutos = rtrim($nomesProdutos, ', ');
+      $prodQuant = $user->shopUsers->toArray();
+
+      // Inicializa uma variável para armazenar os nomes dos produtos
+      $nomesProdutos = '';
+
+      // Loop através de todos os produtos e concatena os nomes
+      foreach ($prodQuant as $produto) {
+          $nomesProdutos .= $produto['nome'] . ', ';
+      }
+
+      // Remove a vírgula extra no final da string
+      $nomesProdutos = rtrim($nomesProdutos, ', ');
+
+       // // // // // // // // // // // // // // // // // //
+
+      $infoEnd = [];
+     
+      // Loop através de todos os produtos e concatena os nomes
+      foreach ($enderecoUser as $endereco) {
+      $infoEnd[] = $endereco;
+      }
 
 
-        $endpoint = 'https://sandbox.api.pagseguro.com/orders';
-        $token = '5CDFE1B717394FBCB659BACF6D2572C7';
+      $endpoint = 'https://sandbox.api.pagseguro.com/orders';
+      $token = '5CDFE1B717394FBCB659BACF6D2572C7';
 
-$body =
-  [
-    "reference_id" => "ex-00001",
-    "customer" => [
-      "name" => "$user->name",
-      "email" => "$user->email",
-      "tax_id" => "12345678909",
-      "phones" => [
+        $body =
         [
-          "country" => "55",
-          "area" => "11",
-          "number" => "999999999",
-          "type" => "MOBILE"
-        ]
-      ]
-    ],
+          "reference_id" => "ex-00001",
+          "customer" => [
+            "name" => "$user->name",
+            "email" => "$user->email",
+            "tax_id" => "12345678909",
+            "phones" => [
+              [
+                "country" => "55",
+                "area" => "11",
+                "number" => "999999999",
+                "type" => "MOBILE"
+              ]
+            ]
+          ],
 
-    "items" => [
-      [
-        "name" =>  $nomesProdutos,
-        "quantity" => count($prodQuant),
-        "unit_amount" => 500
-      ]
-    ],
-    "qr_codes" => [
-      [
-        "amount" => [
-          "value" => 500
-        ],
-        "expiration_date" => "2024-06-29T20:15:59-03:00",
-      ]
-    ],
-    "shipping" => [
-      "address" => [
-        "street" => "Avenida Brigadeiro Faria Lima",
-        "number" => "1384",
-        "complement" => "apto 12",
-        "locality" => "Pinheiros",
-        "city" => "São Paulo",
-        "region_code" => "SP",
-        "country" => "BRA",
-        "postal_code" => "01452002"
-      ]
-    ],
-    "notification_urls" => [
-      "https://alexandrecardoso-pagseguro.ultrahook.com"
-    ]
-  ];
+          "items" => [
+            [
+              "name" =>  $nomesProdutos,
+              "quantity" => count($prodQuant),
+              "unit_amount" => 500
+            ]
+          ],
+          "qr_codes" => [
+            [
+              "amount" => [
+                "value" => 500
+              ],
+              "expiration_date" => "2024-06-29T20:15:59-03:00",
+            ]
+          ],
+          "shipping" => [
+            "address" => [
+              "street" => "rua",
+              "number" => "1384",
+              "complement" => "apto 12",
+              "locality" => "Pinheiros",
+              "city" => "São Paulo",
+              "region_code" => "SP",
+              "country" => "BRA",
+              "postal_code" => "01452002"
+            ]
+          ],
+          "notification_urls" => [
+            "https://alexandrecardoso-pagseguro.ultrahook.com"
+          ]
+        ];
 
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $endpoint);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($curl, CURLOPT_CAINFO, "cacert.pem");
-    curl_setopt($curl, CURLOPT_HTTPHEADER, [
-    'Content-Type:application/json',
-    'Authorization: Bearer ' . $token
-    ]);
+          $curl = curl_init();
+          curl_setopt($curl, CURLOPT_URL, $endpoint);
+          curl_setopt($curl, CURLOPT_POST, true);
+          curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+          curl_setopt($curl, CURLOPT_CAINFO, "cacert.pem");
+          curl_setopt($curl, CURLOPT_HTTPHEADER, [
+          'Content-Type:application/json',
+          'Authorization: Bearer ' . $token
+          ]);
 
-    $response = curl_exec($curl);
-    $error = curl_error($curl);
+          $response = curl_exec($curl);
+          $error = curl_error($curl);
 
-    curl_close($curl);
+          curl_close($curl);
 
-    //if ($error) {
-    //var_dump($error);
-   // die();
-   // }
+          //if ($error) {
+          //var_dump($error);
+        // die();
+        // }
 
-   //$data = json_decode($response, true);
- 
-   // var_dump($data);
-   
+        $data = json_decode($response, true);
 
+         var_dump($data);
+        
+
+
+    } elseif(isset($dados['cartao'])) {
+
+      echo 'cartao';
+
+    }
+      
+       
     return view('pay', [
         'response' => json_decode($response, true),
         'error' => $error
@@ -216,26 +244,55 @@ $body =
         return view('events.cart');
     }
 
-    public function carrinho($id) {
 
+
+    public function carrinho(Request $request, $id)
+    {
         $user = auth()->user();
+        $quantity = $request->input('quantity');
+        $produto = Shop::findOrFail($id);
+    
+        // Verificar se o produto já está no carrinho do usuário
+        $carrinho = $user->shopUserCarrinho()->where('shop_id', $produto->id)->first();
 
-        $shop = Shop::findOrFail($id); 
-        
-        $user->shopUsers()->attach($shop->id);
-
-        return redirect('/')->with('msg', 'Produto adicionado ao carrinho');
-
+        if ($carrinho) {
+            // Se o produto já estiver no carrinho, atualize a quantidade e calcule o valor total
+            $carrinho->quantity += $quantity;
+            $carrinho->valor += $quantity * $produto->valor;
+            $carrinho->save();
+        } else {
+            // Se o produto não estiver no carrinho, crie um novo registro
+            $carrinho = new ShopUser();
+            $carrinho->user_id = $user->id;
+            $carrinho->shop_id = $produto->id;
+            $carrinho->quantity = $quantity;
+            $carrinho->valor = $quantity * $produto->valor;
+            $carrinho->save();
+        }
+        return redirect('/')->with('msg', 'Produto adicionado ao carrinho com sucesso.');
     }
+    
 
     public function mostrarCarrinho() {
         $user = auth()->user();
 
+        $carrinhoProdu = $user->shopUserCarrinho; // Estou tendo acesso ao valor total e a quantidade de prod.
+
         $shop = $user->shopUsers;
 
-        $shopSoma = $shop->sum('valor');
+        // Total do carrinho
+        $shopSoma = $carrinhoProdu->sum('valor');
 
-        return view('events.cart', ['shop' => $shop, 'shopSoma' => $shopSoma]);
+        // lógica para quando o usuario já tiver o endereço cadastrado
+        $endereco = $user->enderecos;
+
+        return view('events.cart', ['shop' => $shop, 'shopSoma' => $shopSoma, 'endereco' => $endereco, 'carrinhoProdu' => $carrinhoProdu]);
+    }
+
+    public function atualizarCarrinho(Request $request) {
+        $shop = new Shop();
+
+
     }
     
 
@@ -324,6 +381,15 @@ $body =
         return view('events.favorito', ['shops' => $shops]);
     }
 
+    public function favDelete(string $id)
+    {
+        $user = auth()->user();
+
+        $user->shops()->detach($id);
+
+        return redirect('/events/favorito')->with('msg', 'Produto deletado dos favoritos!');
+    }
+
  
 
     /**
@@ -342,6 +408,6 @@ $body =
 
         $user->shopUsers()->detach($id);
 
-        return redirect('/events/carrinho')->with('msg', 'Produto deletado do carrinho!!');
+        return redirect('/events/carrinho')->with('msg', 'Produto deletado do carrinho!');
     }
 }
