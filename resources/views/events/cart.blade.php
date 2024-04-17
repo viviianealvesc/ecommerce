@@ -2,6 +2,7 @@
 @section('title', 'Beca Store')
 @section('content')
 
+
 	<!-- Page Info -->
 	<div class="page-info-section page-info">
 		<div class="container">
@@ -11,7 +12,7 @@
 	<!-- Page Info end -->
 
 
-	@if(count($shop) == 0)
+	@if(count($carrinhoProdu) == 0)
 
 	<div class="page-area cart-page spad">
 		<div class="col-4 m-auto">
@@ -32,39 +33,46 @@
 							<th>Preço</th>
 							<th>Quantidade</th>
 							<th class="total-th">Total</th>
+							<th>Atualizar</th>
 						</tr>
 					</thead>
 					<tbody>
 
-					  @foreach($shop as $shops)
-					    @foreach($carrinhoProdu as $carrinhos)
+			
+					@foreach($carrinhoProdu as $carrinhos)
 						<tr>
 							<td class="product-col">
-								<img width="100" src="/img/shop/{{ $shops->image }}" alt="">
+								<img width="100" src="/img/shop/{{ $carrinhos->product->image }}" alt="">
 								<div class="pc-title">
-									<h6>{{ $shops->nome }}</h6>
-									<form action="/events/delete/{{ $shops->id }}" method="GET">
+									<h6>{{ $carrinhos->product->nome }}</h6>
+									<form action="/events/delete/{{ $carrinhos->product->id }}" method="GET">
 										@csrf
 										@method('DELETE')
-									  <a class="btn btn-danger" href="/events/delete/{{ $shops->id }}">Excluir item</a>
+										<button type="submit" class="btn btn-danger">Excluir item</button>
 									</form>
 								</div>
 							</td>
-							<td class="price-col">{{ $shops->valor }}</td>
+							<td class="price-col">{{ $carrinhos->product->valor }}</td>
 							<td class="quy-col">
 								<div class="quy-input">
 									<span>Qty</span>
-									  <input name="quantidade" id="quantidade" min="1" type="number" value="{{ $carrinhos->quantity }}">
-								</div>
-								
+									<input name="quantidade" id="quantidade" min="1" type="number" value="{{ $carrinhos->quantity }}">
+								</div>    
+							</td>
+							<td class="price-col">
+								<p>{{ $carrinhos->valor }}.00</p>
 							</td>
 							<td class="total-col">
-							<p>{{ $carrinhos->valor }} </p>
+								<form action="/events/carrinho/{{ $carrinhos->product->id }}" method="post">
+									@csrf
+									<input type="hidden" name="valor" id="valor" value="{{ $carrinhos->product->valor }}">
+									<input type="hidden" name="quantity" id="quantity" min="1" value="1">
+									<button type="submit" class="btn"><img src="/img/icons/atualizar.png" alt=""></button>
+								</form>
 							</td>
 						</tr>
-						@endforeach
-
 					@endforeach
+
 					
 					
 					</tbody>

@@ -429,6 +429,10 @@
 	padding-left: 10px;
 }
 
+form .btn {
+	border: none;
+}
+
     </style>
 
 </head>

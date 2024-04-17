@@ -255,12 +255,21 @@ class ShopController extends Controller
         // Verificar se o produto já está no carrinho do usuário
         $carrinho = $user->shopUserCarrinho()->where('shop_id', $produto->id)->first();
 
-        if ($carrinho) {
+        if (isset($carrinho) && $quantity < $carrinho->quantity) {
+
+            $carrinho->quantity -= $quantity;
+            $carrinho->valor -= $quantity * $produto->valor;
+            $carrinho->save();
+
+            return redirect()->route('cart.carrinho')->with('msg', 'Carrinho atualizado!');
+
+        } elseif($carrinho) {
             // Se o produto já estiver no carrinho, atualize a quantidade e calcule o valor total
             $carrinho->quantity += $quantity;
             $carrinho->valor += $quantity * $produto->valor;
             $carrinho->save();
-        } else {
+
+        }else {
             // Se o produto não estiver no carrinho, crie um novo registro
             $carrinho = new ShopUser();
             $carrinho->user_id = $user->id;
@@ -277,16 +286,14 @@ class ShopController extends Controller
         $user = auth()->user();
 
         $carrinhoProdu = $user->shopUserCarrinho; // Estou tendo acesso ao valor total e a quantidade de prod.
-
-        $shop = $user->shopUsers;
-
+        
         // Total do carrinho
         $shopSoma = $carrinhoProdu->sum('valor');
 
         // lógica para quando o usuario já tiver o endereço cadastrado
         $endereco = $user->enderecos;
 
-        return view('events.cart', ['shop' => $shop, 'shopSoma' => $shopSoma, 'endereco' => $endereco, 'carrinhoProdu' => $carrinhoProdu]);
+        return view('events.cart', ['shopSoma' => $shopSoma, 'endereco' => $endereco, 'carrinhoProdu' => $carrinhoProdu]);
     }
 
     public function atualizarCarrinho(Request $request) {

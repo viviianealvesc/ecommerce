@@ -13,7 +13,7 @@ Route::put('/update/{id}', [ShopController::class, 'update'])->middleware('auth'
 Route::delete('/events/{id}', [ShopController::class, 'destroy'])->middleware('auth');
 Route::get('/events/cart', [ShopController::class, 'cart']);
 Route::post('/events/carrinho/{id}', [ShopController::class, 'carrinho'])->middleware('auth');
-Route::get('/events/carrinho', [ShopController::class, 'mostrarCarrinho']);
+Route::get('/events/carrinho', [ShopController::class, 'mostrarCarrinho'])->name('cart.carrinho');
 Route::get('/events/delete/{id}', [ShopController::class, 'delete']);
 Route::get('/events/leave/{id}', [ShopController::class, 'favorito']);
 Route::get('/events/favoritos/mostrar', [ShopController::class, 'productFav']);

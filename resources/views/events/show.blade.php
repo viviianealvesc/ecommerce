@@ -24,7 +24,7 @@
                 @csrf
                 <input type="hidden" name="valor" id="valor" value="{{ $shop->valor }}"> <!-- Adicione um campo oculto para enviar o valor do produto -->
                 Quant <input class="quantidade" name="quantity" id="quantity" min="1" type="number" value="1"/><br>
-                <button type="submit" class="btn btn-primary" id="event-submit"><img width="20" src="/img/icons/carrinho.png" alt=""> Adicionar ao carrinho</button> <!-- Substitua o link por um botão de envio -->
+                <button type="submit" class="btn btn-primary" id="event-submit"><img width="20" src="/img/icons/carrinho.png" alt=""> Adicionar ao carrinho</button>
             </form>
 
         </div>

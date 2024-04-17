@@ -25,8 +25,8 @@ class ShopUser extends Model
      //}
 
     // Define o relacionamento com o modelo de produto
-     //public function product()
-     //{
-     //    return $this->belongsTo(Shop::class, 'shop_id'); // Especifica o nome da coluna chave estrangeira
-    // }
+     public function product()
+     {
+         return $this->belongsTo(Shop::class, 'shop_id'); // Especifica o nome da coluna chave estrangeira
+     }
 }
